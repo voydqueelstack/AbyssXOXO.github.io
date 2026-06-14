@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Manish Kumar — BCA Student, IIT Madras Data Science, AI & Backend Developer" />
+  <title>Manish Kumar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg:           #0B0B13;
+      --surface:      #13131F;
+      --border:       #1E1E30;
+      --text:         #E8E8F0;
+      --muted:        #6B6B90;
+      --accent:       #8B7CF6;
+      --accent-dim:   rgba(139, 124, 246, 0.08);
+      --accent-edge:  rgba(139, 124, 246, 0.22);
+      --green:        #4ade80;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient top glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 80vw;
+      height: 55vh;
+      background: radial-gradient(ellipse at center top, rgba(139,124,246,0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 4rem;
+      transition: background 0.4s, border-color 0.4s;
+    }
+
+    #nav.scrolled {
+      background: rgba(11,11,19,0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 7rem 2rem 5rem;
+    }
+
+    /* Dot grid with radial fade */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(139,124,246,0.2) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
+      pointer-events: none;
+    }
+
+    /* Bottom fade to page bg */
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 160px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    /* Available badge */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      padding: 0.45rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse-dot 2.2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.45); }
+      60%       { opacity: 0.7; box-shadow: 0 0 0 5px rgba(74,222,128,0); }
+    }
+
+    /* ★ Signature: gradient name */
+    h1.hero-name {
+      font-size: clamp(3rem, 9vw, 5.75rem);
+      font-weight: 700;
+      line-height: 1.03;
+      letter-spacing: -0.035em;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(145deg, #F0F0FA 0%, #D0C4FF 45%, #8B7CF6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 530px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.72;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 0.875rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.7rem 1.6rem;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+      border-radius: 7px;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.7rem 1.6rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      border-radius: 7px;
+      letter-spacing: 0.02em;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent-edge);
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+    }
+
+    /* ─── PAGE LAYOUT ─────────────────────────────── */
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { padding: 6rem 0; }
+
+    /* ─── SECTION LABEL ───────────────────────────── */
+    .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+    }
+    .label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── ABOUT ───────────────────────────────────── */
+    #about p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 680px;
+    }
+    #about p + p { margin-top: 1.25rem; }
+    #about strong { color: var(--text); font-weight: 600; }
+
+    /* ─── EDUCATION ───────────────────────────────── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      transition: border-color 0.2s;
+    }
+    .edu-card:hover { border-color: var(--accent-edge); }
+
+    .edu-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+    }
+
+    .edu-card h3 {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ─── FOCUS AREAS ─────────────────────────────── */
+    .focus-list { border-top: 1px solid var(--border); }
+
+    .focus-item {
+      display: grid;
+      grid-template-columns: 2.75rem 1fr;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .focus-icon {
+      width: 2.75rem;
+      height: 2.75rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-edge);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .focus-text h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.01em;
+    }
+
+    .focus-text p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── INTERESTS ───────────────────────────────── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.77rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+      cursor: default;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .tag:hover {
+      color: var(--accent);
+      border-color: var(--accent-edge);
+      background: var(--accent-dim);
+    }
+
+    /* ─── PHILOSOPHY ──────────────────────────────── */
+    blockquote.philosophy {
+      border-left: 2px solid var(--accent);
+      padding: 0.25rem 0 0.25rem 2rem;
+      font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.55;
+      letter-spacing: -0.02em;
+      max-width: 640px;
+    }
+
+    /* ─── CONTACT ─────────────────────────────────── */
+    .contact-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+      border-radius: 7px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .social-link:hover {
+      color: var(--accent);
+      border-color: var(--accent-edge);
+      background: var(--accent-dim);
+      transform: translateY(-1px);
+    }
+    .social-link svg { flex-shrink: 0; }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    footer .accent { color: var(--accent); }
+
+    /* ─── SCROLL REVEAL ───────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 720px) {
+      #nav          { padding: 1rem 1.5rem; }
+      .nav-links    { gap: 1.5rem; }
+      .container    { padding: 0 1.5rem; }
+      section       { padding: 4.5rem 0; }
+      .edu-grid     { grid-template-columns: 1fr; }
+      footer        { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+    @media (max-width: 460px) {
+      .nav-links    { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, .reveal {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ───────────────────────────────────── -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo" aria-label="Home">MK.dev</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#focus">Focus</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── HERO ──────────────────────────────────── -->
+  <section id="hero" aria-label="Introduction">
+    <div class="hero-inner">
+      <div class="hero-badge" aria-label="Status: available for opportunities">
+        <span class="dot" aria-hidden="true"></span>
+        Available for opportunities
+      </div>
+      <h1 class="hero-name">Manish Kumar</h1>
+      <p class="hero-sub">
+        BCA student &amp; IIT Madras Data Science candidate.
+        Building at the intersection of AI, backend engineering, and intelligent systems.
+      </p>
+      <div class="hero-cta">
+        <a href="#focus" class="btn-primary">See My Work ↓</a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- ─── ABOUT ─────────────────────────────────── -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="label reveal" id="about-heading">About Me</div>
+      <div class="reveal">
+        <p>
+          Hi — I'm Manish, a technology enthusiast and aspiring software developer from Bihar, India. I'm currently pursuing a <strong>Bachelor of Computer Applications (BCA)</strong> alongside an <strong>Online Data Science Degree from IIT Madras</strong>.
+        </p>
+        <p>
+          I'm drawn to the intersection of <strong>software engineering and intelligence</strong> — systems that don't just run, but reason. My focus areas span backend architecture, AI-powered applications, data-driven problem solving, and self-hosted infrastructure. I believe in deliberate practice and turning ambitious ideas into working software.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── EDUCATION ──────────────────────────────── -->
+    <section id="education" aria-labelledby="edu-heading">
+      <div class="label reveal" id="edu-heading">Currently Pursuing</div>
+      <div class="edu-grid reveal">
+        <div class="edu-card">
+          <div class="edu-tag">Undergraduate</div>
+          <h3>Bachelor of Computer Applications</h3>
+          <p>Software engineering, algorithms, databases &amp; systems design</p>
+        </div>
+        <div class="edu-card">
+          <div class="edu-tag">Online Degree</div>
+          <h3>Data Science — IIT Madras</h3>
+          <p>Statistics, machine learning &amp; data-driven problem solving</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FOCUS ──────────────────────────────────── -->
+    <section id="focus" aria-labelledby="focus-heading">
+      <div class="label reveal" id="focus-heading">What I Do</div>
+      <div class="focus-list reveal">
+
+        <div class="focus-item">
+          <div class="focus-icon" aria-hidden="true">🤖</div>
+          <div class="focus-text">
+            <h3>AI-Powered Applications</h3>
+            <p>Exploring intelligent systems, LLM integrations, and AI-driven product development across practical use cases.</p>
+          </div>
+        </div>
+
+        <div class="focus-item">
+          <div class="focus-icon" aria-hidden="true">⚙️</div>
+          <div class="focus-text">
+            <h3>Backend Development</h3>
+            <p>Building scalable server-side systems, RESTful APIs, and clean data pipelines with solid architecture principles.</p>
+          </div>
+        </div>
+
+        <div class="focus-item">
+          <div class="focus-icon" aria-hidden="true">📊</div>
+          <div class="focus-text">
+            <h3>Data Science &amp; Analytics</h3>
+            <p>Transforming raw data into insight and decisions through statistical analysis, visualization, and machine learning.</p>
+          </div>
+        </div>
+
+        <div class="focus-item">
+          <div class="focus-icon" aria-hidden="true">🌐</div>
+          <div class="focus-text">
+            <h3>Web Development</h3>
+            <p>Crafting functional, purposeful web experiences from frontend interfaces to full-stack deployments.</p>
+          </div>
+        </div>
+
+        <div class="focus-item">
+          <div class="focus-icon" aria-hidden="true">🏗️</div>
+          <div class="focus-text">
+            <h3>Automation &amp; Self-Hosted Infrastructure</h3>
+            <p>Experimenting with workflow automation, self-hosted tools, and private server configurations.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── INTERESTS ──────────────────────────────── -->
+    <section id="interests" aria-labelledby="interests-heading">
+      <div class="label reveal" id="interests-heading">Interests</div>
+      <div class="tags reveal" role="list" aria-label="Interest areas">
+        <span class="tag" role="listitem">Artificial Intelligence</span>
+        <span class="tag" role="listitem">Machine Learning</span>
+        <span class="tag" role="listitem">Data Science</span>
+        <span class="tag" role="listitem">Backend Systems</span>
+        <span class="tag" role="listitem">Web Development</span>
+        <span class="tag" role="listitem">Automation</span>
+        <span class="tag" role="listitem">Open Source</span>
+        <span class="tag" role="listitem">Self-Hosted Tech</span>
+        <span class="tag" role="listitem">Distributed Systems</span>
+      </div>
+    </section>
+
+    <!-- ─── PHILOSOPHY ─────────────────────────────── -->
+    <section id="philosophy" aria-labelledby="phil-heading">
+      <div class="label reveal" id="phil-heading">Philosophy</div>
+      <blockquote class="philosophy reveal">
+        "Continuous learning and consistent execution are the foundations of meaningful innovation."
+      </blockquote>
+    </section>
+
+    <!-- ─── CONTACT ────────────────────────────────── -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="label reveal" id="contact-heading">Contact</div>
+      <p class="contact-desc reveal">
+        I'm open to collaborations, internships, and conversations about technology, AI, and building things that matter. Feel free to reach out.
+      </p>
+      <nav class="social-links reveal" aria-label="Social links">
+
+        <!-- ✏️  Replace with your actual GitHub URL -->
+        <a href="https://github.com/" class="social-link" target="_blank" rel="noopener noreferrer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.337 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+          GitHub
+        </a>
+
+        <!-- ✏️  Replace with your actual LinkedIn URL -->
+        <a href="https://linkedin.com/in/" class="social-link" target="_blank" rel="noopener noreferrer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          LinkedIn
+        </a>
+
+        <!-- ✏️  Replace with your actual email -->
+        <a href="mailto:your@email.com" class="social-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/>
+          </svg>
+          Email
+        </a>
+
+      </nav>
+    </section>
+
+    <!-- ─── FOOTER ─────────────────────────────────── -->
+    <footer>
+      <p>© <span id="year"></span> <span class="accent">Manish Kumar</span></p>
+      <p>Patna, Bihar, India</p>
+    </footer>
+
+  </div><!-- /container -->
+
+  <script>
+    // Dynamic copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Scroll-reveal with IntersectionObserver
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+    reveals.forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
